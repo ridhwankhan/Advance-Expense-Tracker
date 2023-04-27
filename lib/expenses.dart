@@ -1,3 +1,4 @@
+import 'package:advanced_expense_app/widgets/list/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:advanced_expense_app/models/expense.dart';
 import 'package:advanced_expense_app/widgets/list/expenses_list.dart';
@@ -12,6 +13,13 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const NewExpense(),
+    );
+  }
+
   final List<Expense> _registeredExpenses = [
     Expense(
       title: 'App dev',
@@ -44,7 +52,10 @@ class _ExpensesState extends State<Expenses> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Expense tracker"),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
+        actions: [
+          IconButton(
+              onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add))
+        ],
       ),
       body: Column(
         children: [
